@@ -5,7 +5,10 @@ export default function Profile() {
     <div className="profile__box">
       <div className="flex__box-lg">
         <div className="profile__image">
-          <img src="https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png" />
+          <img
+            src="https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png"
+            alt="profile_img"
+          />
         </div>
         <div>
           <div className="profile__name">박효준</div>

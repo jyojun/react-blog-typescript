@@ -7,7 +7,7 @@ export default function Header() {
         Blog
       </Link>
       <div>
-        <Link to="/posts/new">New</Link>
+        <Link to="/posts/write">New</Link>
         <Link to="/posts">Post</Link>
         <Link to="/profile">Profile</Link>
       </div>

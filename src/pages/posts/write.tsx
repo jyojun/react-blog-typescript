@@ -1,3 +1,13 @@
+import Footer from "components/Footer";
+import Header from "components/Header";
+import PostForm from "components/PostForm";
+
 export default function PostWrite() {
-  return <h1>Post Write Page</h1>;
+  return (
+    <>
+      <Header />
+      <PostForm />
+      <Footer />
+    </>
+  );
 }
