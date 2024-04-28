@@ -79,8 +79,8 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
                   </div>
                 )}
               </div>
-              <div className="post__content">
-                <MarkDown>{post?.content}</MarkDown>
+              <div className="post__content post__text--pre-wrap">
+                {post?.summary}
               </div>
             </div>
           ))

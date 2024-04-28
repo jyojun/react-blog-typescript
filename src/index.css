@@ -162,6 +162,10 @@ footer a:hover {
   color: gray;
 }
 
+.post__text--pre-wrap {
+  white-space: pre-wrap;
+}
+
 /* post detail */
 
 .post__detail .post__title {
