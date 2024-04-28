@@ -1,14 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "firebaseApp";
+import MarkDown from "marked-react";
+import AuthContext from "context/AuthContext";
 
 interface PostListProps {
   hasNavigation?: boolean;
+}
+
+export interface PostProps {
+  id?: string;
+  title: string;
+  email: string;
+  summary: string;
+  content: string;
+  createdAt: string;
 }
 
 type TabType = "all" | "my";
 
 export default function PostList({ hasNavigation = true }: PostListProps) {
   const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const { user } = useContext(AuthContext);
+  const getPosts = async () => {
+    setPosts([]);
+    const data = await getDocs(collection(db, "posts"));
+
+    data?.forEach((doc) => {
+      const dataObj = { ...doc.data(), id: doc.id };
+      setPosts((prev) => [...prev, dataObj] as PostProps[]);
+    });
+  };
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <>
       {hasNavigation && (
@@ -30,38 +57,36 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
         </div>
       )}
       <div className="post__list">
-        {[...Array(10)].map((e, index) => (
-          <div className="post__item" key={index}>
-            <Link to={`/posts/${index}`}>
-              <h2 className="post__title">
-                Translation of Lorem Ipsum {index}
-              </h2>
+        {posts?.length > 0 ? (
+          posts.map((post, index) => (
+            <div className="post__item" key={index}>
+              <Link to={`/posts/${post?.id}`}>
+                <h2 className="post__title">{post?.title}</h2>
+              </Link>
               <div className="post__profile-box">
                 <div className="post__info">
                   <div className="post__author-name">
-                    Posted by {"Hyojun Park"}
+                    Posted by {post?.email}
                   </div>
-                  <div className="post__date">Mar 16. 2024 02:53 PM</div>
+                  <div className="post__date">{post?.createdAt}</div>
                 </div>
-                <div className="post__utils-box">
-                  <div className="post__edit">Edit</div>
-                  <div className="post__delete">Delete</div>
-                </div>
+                {post?.email === user?.email && (
+                  <div className="post__utils-box">
+                    <div className="post__edit">
+                      <Link to={`/posts/edit/${post.id}`}>Edit</Link>
+                    </div>
+                    <div className="post__delete">Delete</div>
+                  </div>
+                )}
               </div>
               <div className="post__content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                imperdiet tortor non malesuada tempor. Donec gravida eleifend
-                nunc, id cursus dui dapibus eget. Cras vestibulum tellus quis
-                arcu blandit dignissim. Curabitur tincidunt ex sed quam tempus
-                dignissim. Quisque eget suscipit mauris. Nullam a faucibus
-                neque, luctus suscipit eros. Quisque vel urna egestas, luctus
-                ligula in, pellentesque risus. Sed id metus et felis
-                sollicitudin lacinia sit amet in orci. Ut ultricies nibh eu
-                condimentum venenatis.
+                <MarkDown>{post?.content}</MarkDown>
               </div>
-            </Link>
-          </div>
-        ))}
+            </div>
+          ))
+        ) : (
+          <div className="post__no-post">No Posts</div>
+        )}
       </div>
     </>
   );
