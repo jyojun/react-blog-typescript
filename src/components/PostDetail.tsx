@@ -1,25 +1,34 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PostProps } from "./PostList";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
 import MarkDown from "marked-react";
 import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 export default function PostDetail() {
   const [post, setPost] = useState<PostProps | null>(null);
   const params = useParams();
   const postId = params?.id;
+  const navigate = useNavigate();
+
   const getPost = async (id: string) => {
     const docRef = doc(db, "posts", id);
     const docSnap = await getDoc(docRef);
     setPost({ id: docSnap.id, ...(docSnap.data() as PostProps) });
   };
-  const handleDelete = () => {
-    console.log("delete");
+  const handleDelete = async () => {
+    const confirm = window.confirm("해당 게시글을 삭제하시겠습니까?");
+    if (confirm && post && post.id) {
+      await deleteDoc(doc(db, "posts", post.id));
+      toast.success("게시글이 삭제되었습니다.");
+      navigate("/");
+    }
   };
   useEffect(() => {
     if (postId) getPost(postId);
+    console.log(post);
   }, [postId]);
   return (
     <>
@@ -33,6 +42,7 @@ export default function PostDetail() {
                 <div className="post__date">{post?.createdAt}</div>
               </div>
               <div className="post__utils-box">
+                {post?.tag && <div className="post__tag">{post?.tag}</div>}
                 <div className="post__edit">
                   <Link to={`/posts/edit/${post?.id}`}>Edit</Link>
                 </div>

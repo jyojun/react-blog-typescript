@@ -19,29 +19,163 @@ code {
     monospace;
 }
 
+body {
+  padding-top: 80px;
+  /* 헤더의 높이만큼 콘텐츠를 아래로 밀어냄 */
+}
+
 /* header */
-header {
+.header {
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
-  min-height: 40px;
   align-items: center;
-}
-
-header .header__logo {
-  color: black;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-header a {
-  margin: 0px 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  /* 헤더 배경을 투명하지 않게 설정 */
+  z-index: 1000;
   color: gray;
+  text-decoration: none;
+  /* 헤더가 다른 콘텐츠 위에 레이어링되도록 설정 */
 }
 
-header a:focus,
-header a:hover {
+.header > a {
+  text-decoration: none;
   color: black;
+}
+
+
+
+
+button.menu-toggle {
+  border: none;
+  color: transparent;
+}
+.hamburger {
+  display: block;
+  cursor: pointer;
+  /* 추가: 마우스 포인터를 손가락 모양으로 변경 */
+  width: 30px;
+  /* 버튼의 너비 */
+  height: 2px;
+  /* 버튼의 두께 */
+  background-color: gray;
+  /* 버튼의 색상 */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  /* 상단과 하단 줄의 두께 */
+  background-color: gray;
+  /* 상단과 하단 줄의 색상 */
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -10px;
+  left: 0;
+  /* 상단 줄의 위치 */
+}
+
+.hamburger::after {
+  top: 10px;
+  left: 0;
+  /* 하단 줄의 위치 */
+}
+
+.hamburger.open {
+  background-color: transparent;
+  /* 활성화 시 중간 줄이 보이지 않게 */
+}
+
+.hamburger.open::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger.open::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+.menu-links {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  left: 0;
+  top: 58px;
+  z-index: 1000;
+  transition: all 0.5s ease;
+}
+
+.menu-links a {
+  color: black;
+  padding: 10px 20px;
+}
+
+.menu-links.show {
+  display: flex;
+  animation: slideDown 0.5s forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hamburger,
+  .menu-toggle {
+    display: none;
+    /* 햄버거 버튼을 숨깁니다 */
+  }
+
+  .menu-links {
+    display: flex;
+    /* 메뉴 링크를 표시합니다 */
+    position: static;
+    /* 절대 위치를 해제합니다 */
+    flex-direction: row;
+    /* 링크를 행 방향으로 배열합니다 */
+    align-items: center;
+    /* 링크를 세로 중앙에 정렬합니다 */
+    background-color: transparent;
+    /* 배경 색을 투명하게 합니다 */
+    justify-content: flex-end;
+  }
 }
 
 /* footer */
@@ -116,6 +250,7 @@ footer a:hover {
 /* post profile box */
 .post__profile-box {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -131,6 +266,11 @@ footer a:hover {
 }
 
 .post__utils-box {
+  display: flex;
+  gap: 10px;
+}
+
+.post__info-box {
   display: flex;
   gap: 10px;
 }
@@ -171,6 +311,16 @@ footer a:hover {
 .post__detail .post__title {
   font-size: 36px;
   line-height: 40px;
+}
+
+.post__tag {
+  color: gray;
+  border: 1px solid lightgray;
+  background: #f2f2f2;
+  padding: 0px 4px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-style: normal;
 }
 
 /* profile */
@@ -447,6 +597,14 @@ input:checked + .carousel__slide-container .nav label {
 
 .form__error {
   color: red;
+}
+
+.form select {
+  border: 1px solid lightgray;
+  max-width: 680px;
+  height: 40px;
+  padding: 0px 20px;
+  border-radius: 0.3rem;
 }
 
 /* loader */
