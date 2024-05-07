@@ -28,7 +28,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 23px 20px;
   align-items: center;
   position: fixed;
   top: 0;
@@ -46,8 +46,6 @@ body {
   text-decoration: none;
   color: black;
 }
-
-
 
 
 button.menu-toggle {
@@ -91,25 +89,10 @@ button.menu-toggle {
   left: 0;
   /* 하단 줄의 위치 */
 }
-
-.hamburger.open {
-  background-color: transparent;
-  /* 활성화 시 중간 줄이 보이지 않게 */
-}
-
-.hamburger.open::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.hamburger.open::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
 .menu-links {
   display: none;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   position: absolute;
   background-color: white;
   width: 100%;
@@ -120,8 +103,15 @@ button.menu-toggle {
 }
 
 .menu-links a {
+  width: 100%;
+  text-align: center;
   color: black;
   padding: 10px 20px;
+}
+
+.menu-links a:hover,
+.menu-links a:focus {
+  background-color: lightgray;
 }
 
 .menu-links.show {
@@ -140,6 +130,9 @@ button.menu-toggle {
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 30px 20px;
+  }
   .menu-links {
     display: none;
   }
@@ -197,6 +190,12 @@ footer a {
 footer a:focus,
 footer a:hover {
   color: black;
+}
+
+.footer__theme-btn {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
 }
 
 /* post navigation */
@@ -331,7 +330,6 @@ footer a:hover {
   gap: 18px;
   align-items: center;
   margin: 0 auto;
-  margin-top: 5rem;
   max-width: 680px;
   text-align: left;
   line-height: 24px;
@@ -390,7 +388,6 @@ footer a:hover {
 .carousel {
   margin: 0 auto;
   max-width: 980px;
-  margin-top: 36px;
 }
 
 ul.carousel__slides {
@@ -520,7 +517,6 @@ input:checked + .carousel__slide-container .nav label {
   margin: 0 auto;
   max-width: 680px;
   padding: 20px;
-  margin-top: 20px;
 }
 
 .form input {
@@ -620,4 +616,51 @@ input:checked + .carousel__slide-container .nav label {
   border: 5px solid #2563eb;
   border-radius: 50%;
   z-index: 9999;
+}
+
+.white {
+  transition: all 0.25s linear;
+  background-color: white;
+}
+
+.dark {
+  transition: all 0.25s linear;
+  background-color: #1e2937;
+}
+
+.dark a,
+.dark .form label,
+.dark .post__delete,
+.dark .profile__logout,
+.dark .from__title,
+.dark .post__navigation--active,
+.dark .post__title,
+.dark .post__author-name,
+.dark .footer__theme-btn,
+.dark .profile__name {
+  color: white;
+}
+
+.dark a:hover,
+.dark a:focus,
+.dark .post__text,
+.dark .post__text--pre-wrap,
+.dark .profile__email,
+.dark .post__date,
+.dark .form_block {
+  color: lightgray;
+}
+
+.dark .menu-links a:hover {
+  background-color: #2f3a48;
+}
+
+.dark .form__error {
+  color: #ff6a71;
+}
+
+.dark footer,
+.dark header,
+.dark .menu-links {
+  background-color: #111827;
 }

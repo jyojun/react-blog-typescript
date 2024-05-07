@@ -106,6 +106,7 @@ export default function PostList({
           {TAGS?.map((tag) => (
             <div
               role="presentation"
+              key={tag}
               onClick={() => setActiveTab(tag)}
               className={activeTab === tag ? "post__navigation--active" : ""}
             >
@@ -130,6 +131,7 @@ export default function PostList({
                 </div>
                 {post?.email === user?.email && (
                   <div className="post__utils-box">
+                    {post?.tag && <div className="post__tag">{post?.tag}</div>}
                     <div className="post__edit">
                       <Link to={`/posts/edit/${post.id}`}>Edit</Link>
                     </div>
