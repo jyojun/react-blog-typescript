@@ -103,7 +103,6 @@ button.menu-toggle {
 }
 
 .menu-links a {
-  width: 100%;
   text-align: center;
   color: black;
   padding: 10px 20px;
@@ -130,9 +129,6 @@ button.menu-toggle {
 }
 
 @media (max-width: 768px) {
-  .header {
-    padding: 30px 20px;
-  }
   .menu-links {
     display: none;
   }
@@ -618,6 +614,101 @@ input:checked + .carousel__slide-container .nav label {
   z-index: 9999;
 }
 
+/* comments */
+
+.comments {
+  width: 100%;
+  text-align: start;
+}
+
+.comments__form {
+  width: 100%;
+}
+
+.comments__form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.comments__form .form__text {
+  width: 100%;
+  display: flex;
+  border-radius: 0.3rem;
+}
+
+.comments__form .form__text textarea {
+  font-size: 15px;
+  border: 1px solid lightgray;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  flex: 1;
+}
+
+.comments__form .form__text input {
+  width: 5rem;
+  border: 1px solid lightgray;
+  border-left: none;
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.comments__form .form__text input:hover,
+.comments__form .form__text input:focus {
+  background-color: #dfdfdf;
+}
+
+.comments__list {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.comment__box {
+  padding: 10px 0px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.comment__profile-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.comment__email {
+  font-weight: 500;
+}
+
+.comment__date {
+  color: gray;
+}
+
+.comment__delete {
+  color: gray;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.comment__delete:hover,
+.comment__delete:focus {
+  color: black;
+}
+
+.comment__text {
+  font-size: 14px;
+  padding-top: 4px;
+}
+
+
+/* dark mode */
+
 .white {
   transition: all 0.25s linear;
   background-color: white;
@@ -637,7 +728,9 @@ input:checked + .carousel__slide-container .nav label {
 .dark .post__title,
 .dark .post__author-name,
 .dark .footer__theme-btn,
-.dark .profile__name {
+.dark .profile__name,
+.dark .comments,
+.dark .comments__list {
   color: white;
 }
 
@@ -647,8 +740,15 @@ input:checked + .carousel__slide-container .nav label {
 .dark .post__text--pre-wrap,
 .dark .profile__email,
 .dark .post__date,
-.dark .form_block {
+.dark .form_block,
+.dark .comment__date, 
+.dark .comment__delete {
   color: lightgray;
+}
+
+.dark .comment__delete:hover,
+.dark .comment__delete:focus {
+  color: white;
 }
 
 .dark .menu-links a:hover {
@@ -664,3 +764,4 @@ input:checked + .carousel__slide-container .nav label {
 .dark .menu-links {
   background-color: #111827;
 }
+

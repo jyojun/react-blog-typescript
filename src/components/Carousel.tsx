@@ -1,13 +1,11 @@
 import { useState } from "react";
 
 const IMAGE_1_URL =
-  "https://images.unsplash.com/photo-1601397213627-12bbfd095a0a?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  "https://cdn.inflearn.com/public/users/thumbnails/1159582/02a3b156-f9ae-438e-8ab5-f0df0bcbf000";
 
-const IMAGE_2_URL =
-  "https://images.unsplash.com/photo-1603486002664-a7319421e133?q=80&w=2142&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const IMAGE_2_URL = "https://img.onnada.com/2022/0202/5f21eef217.jpg";
 
-const IMAGE_3_URL =
-  "https://images.unsplash.com/photo-1571950758113-5ada70ff33e5?q=80&w=2094&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const IMAGE_3_URL = "https://pbs.twimg.com/media/FZo6v89aQAEy3SF.jpg:large";
 
 export default function Carousel() {
   const [activeImage, setActiveImage] = useState(1);
